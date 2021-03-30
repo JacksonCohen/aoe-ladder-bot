@@ -1,10 +1,18 @@
-const axios = require('axios');
+const fs = require('fs');
 require('dotenv').config();
 
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const client = new Client();
-const { DISCORDJS_BOT_TOKEN, GOOGLE_API_KEY, SHEETS_ID } = process.env;
+const { DISCORDJS_BOT_TOKEN } = process.env;
 const PREFIX = '!';
+
+client.commands = new Collection();
+
+const commandFiles = fs.readdirSync('./src/commands');
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
 
 client.on('ready', () => {
   console.log(`${client.user.username} has logged in.`);
@@ -13,38 +21,24 @@ client.on('ready', () => {
 client.on('message', async (message) => {
   if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-  const [command, ...args] = message.content
+  const [commandName, ...args] = message.content
     .trim()
     .substring(PREFIX.length)
     .split(/\s+/);
 
-  const users = message.guild.members.cache.map(({ user }) => user.username);
+  if (!client.commands.has(commandName)) return;
 
-  switch (command) {
-    case 'ladder': {
-      const { data } = await axios.get(
-        `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Ranking!A2:B100?key=${GOOGLE_API_KEY}`,
-      );
-      const rankings = data.values.map((rank) => rank.join('. ')).join('\n');
-      return message.channel.send(rankings);
-    }
-    case 'challenge': {
-      if (args.length === 0) {
-        return message.reply('you gotta @ someone to challenge them');
-      }
-      console.log(message.mentions.users);
-      break;
-    }
-    case 'accept': {
-    }
-    case 'decline': {
-    }
-    case 'record': {
-      break;
-    }
-    case 'history': {
-      break;
-    }
+  const command = client.commands.get(commandName);
+
+  if (command.guildOnly && message.channel.type === 'dm') {
+    return message.reply("You trying to get sneaky? You can't DM me commands.");
+  }
+
+  try {
+    command.execute(message, args);
+  } catch (error) {
+    console.error(error);
+    message.reply('there was an error trying to execute that command!');
   }
 });
 
