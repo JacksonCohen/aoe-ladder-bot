@@ -17,6 +17,12 @@ client.on('message', (message) => {
       .substring(PREFIX.length)
       .split(/\s+/);
   }
+
+  if (command === 'ladder') {
+  } else if (command === 'challenge') {
+  } else if (command === 'record') {
+  } else if (command === 'history') {
+  }
 });
 
 client.login(process.env.DISCORDJS_BOT_TOKEN);
