@@ -11,36 +11,39 @@ client.on('ready', () => {
 });
 
 client.on('message', async (message) => {
-  if (message.author.bot) return;
+  if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-  if (message.content.startsWith(PREFIX)) {
-    const [command, ...args] = message.content
-      .trim()
-      .substring(PREFIX.length)
-      .split(/\s+/);
+  const [command, ...args] = message.content
+    .trim()
+    .substring(PREFIX.length)
+    .split(/\s+/);
 
-    const users = message.guild.members.cache.map(({ user }) => user.username);
+  const users = message.guild.members.cache.map(({ user }) => user.username);
 
-    switch (command) {
-      case 'ladder': {
-        const { data } = await axios.get(
-          `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Ranking!A2:B100?key=${GOOGLE_API_KEY}`,
-        );
-        const rankings = data.values.map((rank) => rank.join('. ')).join('\n');
-        return message.reply(rankings);
+  switch (command) {
+    case 'ladder': {
+      const { data } = await axios.get(
+        `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Ranking!A2:B100?key=${GOOGLE_API_KEY}`,
+      );
+      const rankings = data.values.map((rank) => rank.join('. ')).join('\n');
+      return message.channel.send(rankings);
+    }
+    case 'challenge': {
+      if (args.length === 0) {
+        return message.reply('you gotta @ someone to challenge them');
       }
-      case 'challenge': {
-        if (args.length === 0) {
-          return message.reply('you gotta @ someone to challenge them');
-        }
-        break;
-      }
-      case 'record': {
-        break;
-      }
-      case 'history': {
-        break;
-      }
+      console.log(message.mentions.users);
+      break;
+    }
+    case 'accept': {
+    }
+    case 'decline': {
+    }
+    case 'record': {
+      break;
+    }
+    case 'history': {
+      break;
     }
   }
 });
