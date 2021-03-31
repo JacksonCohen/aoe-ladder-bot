@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'ping',
+  name: 'decline',
   description: 'Ping!',
   guildOnly: true,
   execute(message, args) {
