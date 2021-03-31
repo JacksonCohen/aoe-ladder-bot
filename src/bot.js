@@ -15,6 +15,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
+  client.user.setActivity('Age of Empires II: Definitive Edition');
   console.log(`${client.user.username} has logged in.`);
 });
 
