@@ -11,6 +11,10 @@ module.exports = {
       return message.reply(
         "slow your roll partner. Why don't you do some more Art of War before challenging multiple people at once?",
       );
+    } else if (getUserFromMention(client, args[0]) === message.author) {
+      return message.reply(
+        'why are you challenging yourself? Take a 60 second break and try again later.',
+      );
     }
 
     const challengee = getUserFromMention(client, args[0]);
