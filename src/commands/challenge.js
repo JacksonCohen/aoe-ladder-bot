@@ -2,7 +2,7 @@ const getUserFromMention = require('../utils/getUserFromMention');
 
 module.exports = {
   name: 'challenge',
-  description: 'Challenge another user to a ladder match.',
+  description: 'Challenges another user to a ladder match.',
   guildOnly: true,
   syntax: '!challenge <user>',
   execute(message, args, client) {

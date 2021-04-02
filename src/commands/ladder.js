@@ -4,7 +4,7 @@ const { GOOGLE_API_KEY, SHEETS_ID } = process.env;
 
 module.exports = {
   name: 'ladder',
-  description: 'Display the ladder for all to see.',
+  description: 'Displays the ladder for all to see.',
   guildOnly: true,
   syntax: '!ladder',
   async execute(message) {

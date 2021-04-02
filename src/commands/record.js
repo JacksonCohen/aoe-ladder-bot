@@ -3,7 +3,7 @@ const { GOOGLE_API_KEY, SHEETS_ID } = process.env;
 
 module.exports = {
   name: 'record',
-  description: 'Record ladder match in Google Sheet for posterity.',
+  description: 'Records ladder match in Google Sheet for posterity.',
   guildOnly: true,
   syntax: '!record',
   async execute(message, args) {
