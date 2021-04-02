@@ -14,7 +14,7 @@ module.exports = {
     const arg0 = args[0] && args[0].toLowerCase();
     const arg1 = args[1] && args[1].toLowerCase();
 
-    if (!username.id) {
+    if (!username) {
       return message.channel.send('The user could not be found.');
     }
     if (!arg1 && arg0 !== '1s' && arg0 !== 'team') {
@@ -41,7 +41,6 @@ module.exports = {
         : 'No stats found.';
       return message.channel.send(result);
     } else if (arg0 === 'team' || arg1 === 'team') {
-      console.log('hello?');
       const { data: stats } = await axios.get(
         `https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id=4&profile_id=${username.id}&count=1`,
       );
