@@ -4,6 +4,7 @@ module.exports = {
   name: 'challenge',
   description: 'Challenge another user to a ladder match.',
   guildOnly: true,
+  syntax: '!challenge <user>',
   execute(message, args, client) {
     if (!args.length) {
       return message.reply('you gotta @ someone to challenge them.');
@@ -20,7 +21,7 @@ module.exports = {
     const challengee = getUserFromMention(client, args[0]);
 
     return message.channel.send(
-      `${message.author} has challenged ${challengee}'s ladder spot! ${challengee} has 24 hours to *!accept* or *!decline*. `,
+      `${message.author} has challenged ${challengee}'s ladder spot! Respond with *!accept* or *!decline*.`,
     );
   },
 };

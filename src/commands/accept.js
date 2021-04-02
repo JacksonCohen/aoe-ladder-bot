@@ -1,7 +1,8 @@
 module.exports = {
   name: 'accept',
-  description: 'Ping!',
+  description: 'Accepts a ladder match challenge.',
   guildOnly: true,
+  syntax: '!accept',
   execute(message, args) {
     message.channel.send('Pong.');
   },

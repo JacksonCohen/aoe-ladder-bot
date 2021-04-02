@@ -4,8 +4,9 @@ const getUserFromMention = require('../utils/getUserFromMention');
 
 module.exports = {
   name: 'stats',
-  description: 'Get stats for a player',
+  description: 'Gets stats for a player.',
   guildOnly: true,
+  syntax: '!stats [user] [type (1s / team)]',
   async execute(message, args, client) {
     const user = getUserFromMention(client, args[0]);
     const username = user

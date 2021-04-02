@@ -6,6 +6,7 @@ module.exports = {
   name: 'ladder',
   description: 'Display the ladder for all to see.',
   guildOnly: true,
+  syntax: '!ladder',
   async execute(message) {
     const {
       data: { values },
