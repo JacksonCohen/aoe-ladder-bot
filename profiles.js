@@ -1,29 +1,29 @@
 module.exports = {
-  Jax: {
+  'Jax': {
     username: 'Breadzilla',
     id: 1981760,
   },
-  MJ: {
+  'MAKEL': {
     username: 'mj_preston',
     id: 3939970,
   },
-  Lendle: {
+  'Lendle': {
     username: 'glt1021',
     id: 3985998,
   },
-  Mattia: {
+  'Mattia Pickett': {
     username: 'mattiapickett',
     id: 5349124,
   },
-  Lama: {
+  'Lama': {
     username: 'Lama1447',
     id: 1943142,
   },
-  Sam: {
+  'GGets': {
     username: 'GGets',
     id: 3933802,
   },
-  AK: {
+  'Kaz': {
     username: 'akkaz',
     id: 2117020,
   },
